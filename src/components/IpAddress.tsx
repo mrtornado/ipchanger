@@ -113,10 +113,10 @@ const IpAddress = () => {
             placeholder="Enter IP Address"
           />
           <button
-            className="cursor-pointer flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-lg border-4 text-white py-2 px-4 rounded-4"
+            className="cursor-pointer text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-2 mr-2 mb-2"
             type="submit"
           >
-            Submit
+            Check
           </button>
         </div>
       </form>
@@ -127,7 +127,7 @@ const IpAddress = () => {
           </div>
           <div className="border-b border-gray-200"></div>
           <div className="mt-4 flex">
-            <div className="text-yellow font-bold mb-2">IPV4 Address: </div>
+            <div className="text-yellow font-bold mb-2">IP Address: </div>
             <span className="ml-1 text-gray-900">{ip.ip}</span>
           </div>
           <div className="my-1 flex">
