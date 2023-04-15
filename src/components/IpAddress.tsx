@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
+import { FiCheck } from "react-icons/fi";
 
 interface IpData {
   ip: string;
@@ -106,13 +107,13 @@ const IpAddress = () => {
       <form onSubmit={handleFormSubmit}>
         <div className="flex items-center border-b border-b-2 border-teal-500 py-1">
           <input
-            className="m-2 bg-transparent border-3 rounded-full w-full text-xl text-white mr-3 py-3 px-4 focus:outline-none"
+            className="m-2 bg-transparent border-white rounded-full w-full text-xl text-white mr-3 py-2 px-6 placeholder:text-white focus:outline-none"
             type="text"
             onChange={handleInputChange}
             placeholder="Enter IP Address"
           />
           <button
-            className="cursor-pointer flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"
+            className="cursor-pointer flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-lg border-4 text-white py-2 px-4 rounded-4"
             type="submit"
           >
             Submit
@@ -121,9 +122,11 @@ const IpAddress = () => {
       </form>
       {ip && !httpError && browser && (
         <div className="mt-4">
-          <div className="text-lg font-bold mb-1">IP Address Information</div>
+          <div className="pl-4 rounded-12 text-lg bg-amber font-bold mb-1">
+            IP Address Information
+          </div>
           <div className="border-b border-gray-200"></div>
-          <div className="my-1 flex">
+          <div className="mt-4 flex">
             <div className="text-yellow font-bold mb-2">IPV4 Address: </div>
             <span className="ml-1 text-gray-900">{ip.ip}</span>
           </div>
@@ -137,38 +140,87 @@ const IpAddress = () => {
               {ip.city}, {ip.country_name}
             </span>
           </div>
-          <div className="pl-4 pt-2 rounded-full border-1 border-solid">
-            <div className="my-1 flex">
-              <div className="text-yellow font-bold mb-2 ">
+
+          <div
+            className={`pl-4 pt-2 pb-2 rounded-full border-1 border-solid ${
+              ip.timezone === browser.timezone ? "border-green-700" : ""
+            }`}
+          >
+            <div className="flex items-center h-8">
+              <div
+                className={`font-bold ${
+                  ip.timezone === browser.timezone
+                    ? "text-white"
+                    : "text-yellow"
+                }`}
+              >
                 IP Address Timezone:
               </div>
-              <span className="ml-1 text-gray-900">{ip.timezone}</span>
+              <span className="ml-2 text-gray-900">{ip.timezone}</span>
+              {ip.timezone === browser.timezone && (
+                <div className="flex ml-auto mr-2 bg-green-700 rounded-full p-1">
+                  <FiCheck className="text-white" size={30} />
+                </div>
+              )}
             </div>
-            <div className="my-1 flex">
-              <div className="text-yellow font-bold mb-2">
+            <div className="flex items-center">
+              <div
+                className={`font-bold ${
+                  ip.timezone === browser.timezone
+                    ? "text-white"
+                    : "text-yellow"
+                }`}
+              >
                 Your Browser Timezone:
               </div>
-              <span className="text-gray-900">{browser.timezone}</span>
+              <span className="ml-2 text-gray-900">{browser.timezone}</span>
             </div>
           </div>
-          <div className="mt-4 pl-4 pt-2 rounded-full border-1 border-solid">
-            <div className="my-1 flex">
-              <div className="text-yellow font-bold mb-2">
+
+          <div
+            className={`mt-4 pl-4 pb-2 pt-2 rounded-full border-1 border-solid ${
+              ip.languages.split(",")[0] === browser.language
+                ? "border-green-700"
+                : ""
+            }`}
+          >
+            <div className="flex items-center h-8">
+              <div
+                className={`font-bold ${
+                  ip.languages.split(",")[0] === browser.language
+                    ? "text-white"
+                    : "text-yellow"
+                }`}
+              >
                 IP Address Language:
               </div>
               <span className="ml-1 text-gray-900">
                 {ip.languages.split(",")[0]}
               </span>
+              {ip.languages.split(",")[0] === browser.language && (
+                <div className="flex ml-auto mr-2 bg-green-700 rounded-full p-1">
+                  <FiCheck className="text-white" size={30} />
+                </div>
+              )}
             </div>
-            <div className="my-1 flex">
-              <div className="text-yellow font-bold mb-2">
+            <div className="flex items-center">
+              <div
+                className={`font-bold ${
+                  ip.languages.split(",")[0] === browser.language
+                    ? "text-white"
+                    : "text-yellow"
+                }`}
+              >
                 Your Browser Language:
               </div>
-              <span className="ml-1 text-gray-900">{browser.language}</span>
+              <span className="ml-2 text-gray-900">{browser.language}</span>
             </div>
           </div>
+
           <div className="mt-4">
-            <div className="text-lg font-bold mb-2">Browser Information</div>
+            <div className="pl-4 rounded-12 text-lg bg-amber font-bold mb-2">
+              Browser Information
+            </div>
             <div className="border-b border-gray-200"></div>
             <div className="my-1 flex">
               <div className="text-yellow font-bold mb-2">
@@ -187,7 +239,7 @@ const IpAddress = () => {
               <span className="ml-1 text-gray-900">{screenSize}</span>
             </div>
             <div className="my-1 flex">
-              <div className="text-yellow font-bold mb-2">OS:</div>
+              <div className="text-yellow font-bold mb-2">OS Identifier:</div>
               <span className="ml-1 text-gray-900">{browser.os}</span>
             </div>
             <div className="my-1 flex">
