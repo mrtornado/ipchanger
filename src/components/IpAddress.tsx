@@ -122,6 +122,11 @@ const IpAddress = () => {
       </form>
       {ip && !httpError && browser && (
         <div className="mt-4">
+          <div className="text-lg p-2 my-2 text-red-600 bg-green-200 rounded-2 ">
+            For successful IP hiding, it is important to have matching timezones
+            and language, and you'll receive a green checkmark as confirmation
+            once they are aligned.
+          </div>
           <div className="pl-4 rounded-12 text-lg bg-amber font-bold mb-1">
             IP Address Information
           </div>
