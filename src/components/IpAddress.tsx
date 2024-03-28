@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FingerprintJS from "@fingerprintjs/fingerprintjs";
-import { FiCheck } from "react-icons/fi";
+import { FiCheck, FiX } from "react-icons/fi";
 
 interface IpData {
   ip: string;
@@ -122,25 +122,27 @@ const IpAddress = () => {
       </form>
       {ip && !httpError && browser && (
         <div className="mt-4">
-          <div className="text-lg p-2 my-2 text-red-600 bg-green-200 rounded-2 ">
-            For successful IP hiding, it is important to have matching timezones
-            and language, and you'll receive a green checkmark as confirmation
-            once they are aligned.
+          <div className="text-lg p-2 my-2 text-white bg-black rounded-2 ">
+            For successful IP hiding, it is important to have matching{" "}
+            <span className="text-red-500">timezones </span>
+            and <span className="text-red-500">browser language </span>, and
+            you'll see a green checkmark as confirmation once they are aligned.
           </div>
           <div className="pl-4 rounded-12 text-lg bg-amber font-bold mb-1">
             IP Address Information
           </div>
-          <div className="border-b border-gray-200"></div>
-          <div className="mt-4 flex">
-            <div className="text-yellow font-bold mb-2">IP Address: </div>
-            <span className="ml-1 text-gray-900">{ip.ip}</span>
+          <div className="flex space-block-sm">
+            <div className="text-yellow font-bold ">IP Address: </div>
+            <span className="ml-1 pl-2 pr-2 bg-green-700 rounded-2 text-white">
+              {ip.ip}
+            </span>
           </div>
-          <div className="my-1 flex">
-            <div className="text-yellow font-bold mb-2">Organization: </div>
+          <div className="flex space-block-sm">
+            <div className="text-yellow font-bold">Organization: </div>
             <span className="text-gray-900 ml-1">{ip.org}</span>
           </div>
-          <div className="my-1 flex">
-            <div className="text-yellow font-bold mb-2">Location:</div>
+          <div className="flex space-block-sm">
+            <div className="text-yellow font-bold">Location:</div>
             <span className="ml-1 text-gray-900">
               {ip.city}, {ip.country_name}
             </span>
@@ -148,7 +150,9 @@ const IpAddress = () => {
 
           <div
             className={`pl-4 pt-2 pb-2 rounded-full border-1 border-solid ${
-              ip.timezone === browser.timezone ? "border-green-700" : ""
+              ip.timezone === browser.timezone
+                ? "border-green-700"
+                : "border-red-700"
             }`}
           >
             <div className="flex items-center h-8">
@@ -162,9 +166,13 @@ const IpAddress = () => {
                 IP Address Timezone:
               </div>
               <span className="ml-2 text-gray-900">{ip.timezone}</span>
-              {ip.timezone === browser.timezone && (
+              {ip.timezone === browser.timezone ? (
                 <div className="flex ml-auto mr-2 bg-green-700 rounded-full p-1">
                   <FiCheck className="text-white" size={30} />
+                </div>
+              ) : (
+                <div className="flex ml-auto mr-2 bg-red-700 rounded-full p-1">
+                  <FiX className="text-white" size={30} />
                 </div>
               )}
             </div>
@@ -186,7 +194,7 @@ const IpAddress = () => {
             className={`mt-4 pl-4 pb-2 pt-2 rounded-full border-1 border-solid ${
               ip.languages.split(",")[0] === browser.language
                 ? "border-green-700"
-                : ""
+                : "border-red-700"
             }`}
           >
             <div className="flex items-center h-8">
@@ -202,9 +210,13 @@ const IpAddress = () => {
               <span className="ml-1 text-gray-900">
                 {ip.languages.split(",")[0]}
               </span>
-              {ip.languages.split(",")[0] === browser.language && (
+              {ip.languages.split(",")[0] === browser.language ? (
                 <div className="flex ml-auto mr-2 bg-green-700 rounded-full p-1">
                   <FiCheck className="text-white" size={30} />
+                </div>
+              ) : (
+                <div className="flex ml-auto mr-2 bg-red-700 rounded-full p-1">
+                  <FiX className="text-white" size={30} />
                 </div>
               )}
             </div>
