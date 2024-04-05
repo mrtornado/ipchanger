@@ -259,6 +259,7 @@ const IpAddress = () => {
               <div className="text-yellow font-bold mb-2">OS Identifier:</div>
               <span className="ml-1 text-gray-900">{browser.os}</span>
             </div>
+
             <div className="my-1 flex">
               <div className="text-yellow font-bold mb-2">Device Type:</div>
               <span className="ml-1 text-gray-900">{browser.deviceType}</span>
